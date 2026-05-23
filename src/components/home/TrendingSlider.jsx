@@ -1,0 +1,304 @@
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { MoveRight, Sparkles } from 'lucide-react';
+import SafeImage from '../common/SafeImage';
+import api from '../../api';
+
+// Curated high-end mart/interior/furniture image assets for test database seed fallback
+const CURATED_TRENDING_IMAGES = [
+    "https://images.unsplash.com/photo-1592078615290-033ee584e267?auto=format&fit=crop&q=70&w=600", // Modern lounge chair
+    "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&q=70&w=600", // Minimal green sofa
+    "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&q=70&w=600", // Generational ash wood chair
+    "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=70&w=600", // Architectural side table
+    "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=70&w=600"  // Teak wood credenza
+];
+
+const TrendingSlider = () => {
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const scrollRef = useRef(null);
+    const [visibleCount, setVisibleCount] = useState(4); // Render exactly 4 initially for clean centering
+
+    useEffect(() => {
+        const fetchTrending = async () => {
+            try {
+                const { data } = await api.get('/products/trending');
+                setProducts(data);
+            } catch (error) {
+                console.error('Error fetching trending products', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchTrending();
+    }, []);
+
+    // GPU-accelerated horizontal scroll wheel support with smart page boundary propagation
+    useEffect(() => {
+        const el = scrollRef.current;
+        if (!el) return;
+
+        const handleWheel = (e) => {
+            // Let native horizontal trackpad scrolling work naturally
+            if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+
+            const isScrollUp = e.deltaY < 0;
+            const isScrollDown = e.deltaY > 0;
+            const isAtStart = el.scrollLeft <= 0;
+            const isAtEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 1;
+
+            // Propagate event to window if user has hit scroll limits of the container
+            if ((isScrollUp && isAtStart) || (isScrollDown && isAtEnd)) {
+                return;
+            }
+
+            // Otherwise, perform high-speed responsive custom horizontal scroll on container
+            e.preventDefault();
+            el.scrollBy({
+                left: e.deltaY * 1.1,
+                behavior: 'auto' // Instant feedback for smooth scrolling tracking
+            });
+        };
+
+        el.addEventListener('wheel', handleWheel, { passive: false });
+        return () => {
+            el.removeEventListener('wheel', handleWheel);
+        };
+    }, [loading, visibleCount, products.length]);
+
+    const handleLoadMore = () => {
+        const nextCount = Math.min(visibleCount + 4, products.length);
+        setVisibleCount(nextCount);
+        
+        // Wait for render, then scroll to smoothly reveal new cards
+        setTimeout(() => {
+            if (scrollRef.current) {
+                const cardWidth = scrollRef.current.querySelector('.group\\/item')?.offsetWidth || 300;
+                scrollRef.current.scrollTo({
+                    left: scrollRef.current.scrollLeft + (cardWidth * 2),
+                    behavior: 'smooth'
+                });
+            }
+        }, 100);
+    };
+
+    const visibleProducts = products.slice(0, visibleCount);
+
+    // Determines if the image/name belongs to unrelated test seed data
+    const isTestOrUnrelated = (product, index) => {
+        const imageUrl = (product.images?.[0]?.url || product.image || '').toLowerCase();
+        const name = (product.name || '').toLowerCase();
+        
+        return (
+            imageUrl.includes('flower') || 
+            imageUrl.includes('sunflower') || 
+            imageUrl.includes('car') || 
+            imageUrl.includes('perfume') || 
+            imageUrl.includes('bottle') || 
+            name.includes('addff') || 
+            name.includes('sadscd') || 
+            name.includes('tcfd') || 
+            name.includes('ebce') || 
+            name.includes('sfd') ||
+            name.length < 4
+        );
+    };
+
+    const getProductImage = (product, index) => {
+        if (isTestOrUnrelated(product, index)) {
+            return CURATED_TRENDING_IMAGES[index % CURATED_TRENDING_IMAGES.length];
+        }
+        return product.images?.[0]?.url || product.image;
+    };
+
+    const cardVariants = {
+        hidden: { opacity: 0, y: 25 },
+        visible: (idx) => ({
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.6,
+                delay: idx * 0.05,
+                ease: [0.25, 1, 0.5, 1]
+            }
+        })
+    };
+
+    return (
+        <section className="relative overflow-hidden pt-24 pb-20 md:pt-28 md:pb-24 border-t border-b border-[#330020]/10 bg-[#330020] bg-[radial-gradient(circle_at_top,rgba(138,143,104,0.06)_0%,rgba(30,10,22,1)_100%)] transition-colors duration-500">
+            {/* Ultra Subtle Editorial Grain Texture Overlay */}
+            <div className="absolute inset-0 pointer-events-none opacity-[0.015] z-0 bg-repeat" style={{
+                backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
+            }} />
+
+            <div className="container mx-auto px-6 lg:px-12 relative z-10">
+                {/* Centered Section Header */}
+                <div className="flex flex-col items-center justify-center text-center max-w-3xl mx-auto mb-14">
+                    <motion.div 
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
+                        className="flex items-center gap-4 mb-3"
+                    >
+                        <div className="w-8 h-[1px] bg-[#8A8F68]/40" />
+                        <span className="text-[#8A8F68] font-bold uppercase tracking-[0.3em] text-[10px]">LIVING SPACES</span>
+                        <div className="w-8 h-[1px] bg-[#8A8F68]/40" />
+                    </motion.div>
+                    
+                    <motion.h2 
+                        initial={{ opacity: 0, y: 15 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: 0.05, ease: [0.25, 1, 0.5, 1] }}
+                        className="text-5xl md:text-7xl font-serif text-[#F6F1EB] font-semibold tracking-tight leading-[1.05] mb-4 italic"
+                    >
+                        Trending Interiors
+                    </motion.h2>
+                    
+                    <motion.div 
+                        initial={{ width: 0, opacity: 0 }}
+                        whileInView={{ width: "8rem", opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, delay: 0.1, ease: [0.25, 1, 0.5, 1] }}
+                        className="h-[2px] bg-[#8A8F68]/80 rounded-full mb-4 mx-auto"
+                    />
+                    
+                    <motion.p 
+                        initial={{ opacity: 0, y: 15 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: 0.1, ease: [0.25, 1, 0.5, 1] }}
+                        className="text-base md:text-lg text-[rgba(246,241,235,0.72)] font-light leading-relaxed max-w-2xl mx-auto"
+                    >
+                        Discover the active pieces defining modern Indian luxury this season. Handpicked for their architectural relevance, contemporary lines, and structural artisanship.
+                    </motion.p>
+                </div>
+
+                {/* Grid & Slider Area */}
+                {loading ? (
+                    <div className="flex gap-6 overflow-hidden py-6 max-w-[1600px] mx-auto select-none pointer-events-none">
+                        {[...Array(4)].map((_, i) => (
+                            <div 
+                                key={i} 
+                                className="w-full sm:w-[calc((100%-24px)/2)] lg:w-[calc((100%-72px)/4)] flex-shrink-0 h-[395px] md:h-[465px] bg-white/5 border border-white/5 animate-pulse rounded-[18px]" 
+                            />
+                        ))}
+                    </div>
+                ) : products.length === 0 ? (
+                    <div className="py-32 text-center bg-white/5 backdrop-blur-sm rounded-[3rem] border border-white/5 shadow-soft">
+                        <p className="text-[#F6F1EB]/40 font-serif text-3xl mb-4 italic tracking-tight">Our curators are currently selecting new pieces.</p>
+                        <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#F6F1EB]/30">Please explore the full collection in the meantime.</p>
+                    </div>
+                ) : (
+                    <div 
+                        ref={scrollRef}
+                        className="flex gap-6 overflow-x-auto overflow-y-hidden scroll-smooth touch-pan-x py-6 relative z-10 select-none scrollbar-none" 
+                        style={{ 
+                            scrollbarWidth: 'none', 
+                            msOverflowStyle: 'none', 
+                            WebkitOverflowScrolling: 'touch' 
+                        }}
+                    >
+                        <AnimatePresence mode='popLayout'>
+                            {visibleProducts.map((product, idx) => (
+                                <motion.div
+                                    key={`trend-${product._id || idx}`}
+                                    custom={idx}
+                                    initial="hidden"
+                                    whileInView="visible"
+                                    viewport={{ once: true, margin: "-50px" }}
+                                    variants={cardVariants}
+                                    className="group/item flex-shrink-0 w-full sm:w-[calc((100%-24px)/2)] lg:w-[calc((100%-72px)/4)]"
+                                >
+                                    <Link to={`/products/${product.slug || product._id}`} className="block">
+                                        <div 
+                                            className="w-full h-[395px] md:h-[465px] overflow-hidden flex flex-col justify-between rounded-[24px] bg-white/[0.03] backdrop-blur-[10px] border border-white/[0.10] shadow-[0_10px_30px_rgba(0,0,0,0.18)] hover:border-white/[0.22] hover:shadow-[0_20px_50px_rgba(0,0,0,0.28)] hover:bg-white/[0.05] hover:-translate-y-[6px] transition-all duration-400 ease-out"
+                                        >
+                                            {/* Image Area - nested with padding to create premium framed editorial layout */}
+                                            <div className="pt-3 px-3 w-full h-[58%]">
+                                                <div className="relative w-full h-full overflow-hidden bg-black/[0.1] rounded-[1.5rem] border border-white/[0.05]">
+                                                    {/* Enhanced trending badge with glow */}
+                                                    <span className="absolute top-4 left-4 z-20 inline-flex items-center gap-1.5 px-3 py-1 bg-[#330020] text-[#F6F1EB] text-[8px] font-bold uppercase tracking-[0.2em] rounded-full border border-white/[0.08] shadow-[0_4px_12px_rgba(51,0,32,0.25)]">
+                                                        <span className="relative flex h-1.5 w-1.5">
+                                                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#8A8F68] opacity-75"></span>
+                                                            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#8A8F68]"></span>
+                                                        </span>
+                                                        Trending
+                                                    </span>
+
+                                                    <SafeImage 
+                                                        src={getProductImage(product, idx)} 
+                                                        alt={product.name}
+                                                        className="w-full h-full object-cover group-hover/item:scale-[1.03] transition-transform duration-500 ease-out"
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            {/* Content Area - Fixed 42% Height with refined padding to avoid overflow */}
+                                            <div className="p-5 md:p-6 flex flex-col justify-between h-[42%] bg-black/[0.01]">
+                                                <div className="space-y-1.5 md:space-y-2 text-center">
+                                                    <span className="font-sans text-[9px] md:text-[10px] font-semibold tracking-[2px] uppercase text-[#8A8F68] block">
+                                                        {product.category?.name || 'Exclusive Selection'}
+                                                    </span>
+                                                    
+                                                    <h3 className="font-sans text-[18px] md:text-[20px] font-semibold leading-[1.35] tracking-[-0.2px] text-[#F6F1EB] line-clamp-2 h-[2.5rem] md:h-[2.8rem] overflow-hidden group-hover/item:text-white transition-colors duration-300">
+                                                        {product.name}
+                                                    </h3>
+                                                </div>
+                                                
+                                                <div className="space-y-2 md:space-y-2.5 text-center">
+                                                    <div className="w-full h-[1px] bg-white/5" />
+                                                    <div className="flex flex-col items-center justify-center gap-1 min-w-0">
+                                                        <span className="font-sans text-[22px] md:text-[24px] font-bold text-[#F6F1EB]">
+                                                            ₹{product.price?.toLocaleString('en-IN')}
+                                                        </span>
+                                                        
+                                                        {product.originalPrice > product.price && (
+                                                            <div className="flex items-center gap-2">
+                                                                 <span className="font-sans text-[12px] opacity-45 line-through text-[#F6F1EB]">
+                                                                    ₹{product.originalPrice?.toLocaleString('en-IN')}
+                                                                </span>
+                                                                <span className="font-sans text-[8px] md:text-[9px] font-semibold tracking-[2px] uppercase text-[#8A8F68] bg-[#8A8F68]/20 px-2 py-0.5 rounded-md">
+                                                                    SAVE ₹{Math.round(product.originalPrice - product.price).toLocaleString('en-IN')}
+                                                                </span>
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </Link>
+                                </motion.div>
+                            ))}
+                        </AnimatePresence>
+                    </div>
+                )}
+
+                {/* Bottom CTA Block */}
+                <div className="mt-14 flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8 relative z-20">
+                    {visibleCount < products.length && (
+                        <button
+                            onClick={handleLoadMore}
+                            className="px-10 py-4.5 rounded-full bg-[#F6F1EB] text-[#330020] font-sans text-[11px] font-bold uppercase tracking-[4px] transition-all duration-500 hover:bg-[#4A012E] hover:text-[#F6F1EB] hover:-translate-y-0.5 hover:shadow-[0_10px_25px_rgba(74,1,46,0.35)] shadow-sm active:scale-98 cursor-pointer border-none"
+                        >
+                            Load More Trending Pieces
+                        </button>
+                    )}
+                    <Link 
+                        to="/collections?filter=trending" 
+                        className="group inline-flex items-center gap-6 font-sans text-[11px] font-bold uppercase tracking-[4px] text-[#F6F1EB] hover:text-white transition-all duration-500 pb-2 relative overflow-hidden"
+                    >
+                        <span>View All Trending Pieces</span>
+                        <MoveRight size={18} className="group-hover:translate-x-3 transition-transform duration-500 text-[#F6F1EB]" />
+                        <span className="absolute bottom-0 left-0 w-full h-[1px] bg-white/10 group-hover:bg-white transition-colors duration-500" />
+                        <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-white group-hover:w-full transition-all duration-500" />
+                    </Link>
+                </div>
+            </div>
+        </section>
+    );
+};
+
+export default TrendingSlider;

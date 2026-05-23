@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+:root {
+  --color-luxury-plum: #330020;
+  --color-luxury-cream: #F6F1EB;
+  --color-luxury-olive: #8A8F68;
+  
+  --color-text-paragraph: rgba(51, 0, 32, 0.72);
+  --color-text-muted: rgba(51, 0, 32, 0.48);
+  --color-border: rgba(51, 0, 32, 0.10);
+  --color-card-bg: rgba(255, 255, 255, 0.55);
+  
+  --font-serif: 'Cormorant Garamond', serif;
+  --font-sans: 'Manrope', sans-serif;
+}
+
+@theme {
+  --color-primary: var(--color-luxury-plum);
+  --color-surface: var(--color-luxury-cream);
+  --color-accent: var(--color-luxury-olive);
+  --color-card: var(--color-card-bg);
+  --color-secondary: var(--color-border);
+  
+  --color-heading: var(--color-luxury-plum);
+  --color-text-base: var(--color-luxury-plum);
+  --color-text-muted: var(--color-text-paragraph);
+  --color-text-dim: var(--color-text-muted);
+  
+  --font-serif: var(--font-serif);
+  --font-sans: var(--font-sans);
+  
+  --radius-pill: 9999px;
+  --radius-luxury: 2.5rem;
+  
+  --shadow-soft: 0 10px 20px rgba(51, 0, 32, 0.04);
+  --shadow-premium: 0 20px 40px rgba(51, 0, 32, 0.08);
+  --shadow-glass: 0 8px 32px 0 rgba(51, 0, 32, 0.04);
+}
+
+@layer base {
+  body {
+    @apply bg-surface text-text-base font-sans antialiased selection:bg-primary selection:text-[#F6F1EB];
+    margin: 0;
+    min-height: 100vh;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif font-medium tracking-tight text-heading;
+  }
+}
+
+@utility glass {
+  @apply bg-card/75 backdrop-blur-md border border-primary/10;
+}
+
+@utility glass-dark {
+  @apply bg-primary/10 backdrop-blur-md border border-white/10;
+}
+
+@utility btn-luxury {
+  @apply relative inline-flex items-center justify-center gap-2 px-8 py-4 overflow-hidden font-sans text-xs font-bold tracking-[0.2em] uppercase transition-all duration-500 rounded-full cursor-pointer border border-transparent;
+  &.primary {
+    @apply bg-primary text-[#F6F1EB] hover:bg-[#4A012E] hover:border-white/[0.08] hover:shadow-[0_0_20px_rgba(74,1,46,0.35)] active:bg-[#220015] hover:-translate-y-0.5;
+  }
+  &.accent {
+    @apply bg-accent text-[#F6F1EB] hover:bg-[#8A8F68]/95 hover:shadow-premium hover:-translate-y-0.5;
+  }
+  &.outline {
+    @apply border border-[#330020]/15 text-[#330020] bg-transparent hover:bg-[#330020]/[0.06] hover:border-[#330020]/25;
+  }
+  &.ghost {
+    @apply text-primary hover:bg-[#330020]/[0.06];
+  }
+}
+
+@utility card-luxury {
+  @apply bg-card rounded-luxury border border-primary/10 transition-all duration-700 hover:shadow-premium hover:-translate-y-2;
+}
+
+@utility section-container {
+  @apply max-w-7xl mx-auto px-6 md:px-10 lg:px-12;
+}
+
+@utility animate-premium-fade {
+  @apply opacity-0 translate-y-8 animate-[fadeUp_1s_cubic-bezier(0.22,1,0.36,1)_forwards];
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-surface;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-primary/20 rounded-full transition-colors hover:bg-primary/40;
+}
+
+/* Page Transitions */
+.page-enter {
+  opacity: 0;
+  transform: scale(0.98);
+}
+.page-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 600ms, transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+}
