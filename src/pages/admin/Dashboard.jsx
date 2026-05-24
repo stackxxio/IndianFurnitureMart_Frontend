@@ -60,8 +60,10 @@ const AdminDashboard = () => {
     });
     const [period, setPeriod] = useState('weekly');
     const [loading, setLoading] = useState(true);
+    const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
+        setIsMounted(true);
         fetchStats();
     }, [period]);
 
@@ -233,8 +235,9 @@ const AdminDashboard = () => {
                                 </div>
                             )}
                             
-                            <div className={`h-full w-full min-h-[350px] min-w-0 ${(!stats.chartData || stats.chartData.length === 0) ? 'opacity-15 blur-[1px] pointer-events-none' : ''}`}>
-                                <ResponsiveContainer width="100%" height="100%" minWidth={1} minHeight={1}>
+                            <div className={`h-[350px] w-full min-w-0 ${(!stats.chartData || stats.chartData.length === 0) ? 'opacity-15 blur-[1px] pointer-events-none' : ''}`}>
+                                {isMounted && (
+                                    <ResponsiveContainer width="100%" height="100%" minWidth={1} minHeight={1}>
                                     <AreaChart data={stats.chartData && stats.chartData.length > 0 ? stats.chartData : placeholderData} margin={{ top: 0, right: 0, left: -20, bottom: 0 }}>
                                         <defs>
                                             <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
@@ -290,6 +293,7 @@ const AdminDashboard = () => {
                                         />
                                     </AreaChart>
                                 </ResponsiveContainer>
+                                )}
                             </div>
                         </div>
 

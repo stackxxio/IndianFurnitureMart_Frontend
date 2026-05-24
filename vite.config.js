@@ -14,7 +14,7 @@ export default defineConfig({
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg}']
       },
-      includeAssets: ['IndianFurnitureIcon.png'],
+      includeAssets: ['IndianFurnitureIcon.png', 'pwa-192x192.png', 'pwa-512x512.png'],
       manifest: {
         name: 'Indian Furniture Mart',
         short_name: 'IFM',
