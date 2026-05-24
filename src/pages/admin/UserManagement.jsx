@@ -88,7 +88,7 @@ const UserManagement = () => {
                         <h1 className="font-serif text-3xl font-semibold text-[#330020] mb-1.5">Premium Customers</h1>
                         <p className="font-sans text-sm font-bold text-[#8A8F68] uppercase tracking-[2px]">Manage customer profiles, preferences and design consultation logs</p>
                     </div>
-                    <div className="flex bg-white/82 backdrop-blur-md px-8 py-4 rounded-[24px] shadow-[0_10px_30px_rgba(51,0,32,0.05)] border border-[#330020]/08 items-center gap-6">
+                    <div className="flex bg-white/82 backdrop-blur-md px-6 md:px-8 py-4 rounded-[1.5rem] md:rounded-[24px] shadow-[0_10px_30px_rgba(51,0,32,0.05)] border border-[#330020]/08 items-center justify-between md:justify-start gap-4 md:gap-6 w-full md:w-auto">
                         <div className="text-right">
                             <p className="text-[9px] font-bold text-[#330020]/48 uppercase tracking-widest mb-0.5">Total Customers</p>
                             <p className="text-xl font-bold text-[#330020]">{users.length}</p>
@@ -102,18 +102,18 @@ const UserManagement = () => {
                 </div>
 
                 {/* Filters */}
-                <div className="flex flex-col md:flex-row gap-6 mb-10">
+                <div className="flex flex-col md:flex-row gap-4 md:gap-6 mb-10">
                     <div className="flex-grow relative">
-                        <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-[#330020]/20" size={18} />
+                        <Search className="absolute left-5 md:left-6 top-1/2 -translate-y-1/2 text-[#330020]/20" size={18} />
                         <input 
                             type="text" 
                             placeholder="Search by name, email, or design preferences..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className="w-full h-16 pl-16 pr-8 bg-white/75 border border-[#330020]/10 rounded-[20px] outline-none focus:border-[#8A8F68] focus:ring-4 focus:ring-[#8A8F68]/08 transition-all font-sans font-semibold text-sm text-[#330020] placeholder:text-[#330020]/40"
+                            className="w-full h-14 md:h-16 pl-12 md:pl-16 pr-6 md:pr-8 bg-white/75 border border-[#330020]/10 rounded-[1.25rem] md:rounded-[20px] outline-none focus:border-[#8A8F68] focus:ring-4 focus:ring-[#8A8F68]/08 transition-all font-sans font-semibold text-sm text-[#330020] placeholder:text-[#330020]/40"
                         />
                     </div>
-                    <Button variant="secondary" className="!px-8 !py-4 !text-[11px] !text-[#330020] font-bold !bg-white/80 border border-[#330020]/10 hover:!bg-[#F6F1EB]">
+                    <Button variant="secondary" className="!px-6 !py-3 md:!px-8 md:!py-4 !text-[10px] md:!text-[11px] !text-[#330020] font-bold !bg-white/80 border border-[#330020]/10 hover:!bg-[#F6F1EB] w-full md:w-auto">
                         <Filter size={14} className="mr-2 text-[#8A8F68]" /> Advanced Filter
                     </Button>
                 </div>

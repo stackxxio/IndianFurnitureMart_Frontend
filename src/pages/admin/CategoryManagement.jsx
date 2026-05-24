@@ -62,7 +62,7 @@ const SortableItem = ({ category, onEdit, onDelete, onToggleStatus }) => {
         <div 
             ref={setNodeRef} 
             style={style}
-            className={`group flex items-center gap-8 p-6 bg-white/82 backdrop-blur-md border border-[#330020]/08 rounded-[28px] hover:shadow-[0_10px_30px_rgba(51,0,32,0.05)] transition-all duration-500 ${isDragging ? 'shadow-2xl ring-2 ring-primary/5 cursor-grabbing' : ''}`}
+            className={`group flex items-center gap-4 md:gap-8 p-4 md:p-6 bg-white/82 backdrop-blur-md border border-[#330020]/08 rounded-[1.5rem] md:rounded-[28px] hover:shadow-[0_10px_30px_rgba(51,0,32,0.05)] transition-all duration-500 ${isDragging ? 'shadow-2xl ring-2 ring-primary/5 cursor-grabbing' : ''}`}
         >
             <div 
                 {...attributes} 
@@ -72,7 +72,7 @@ const SortableItem = ({ category, onEdit, onDelete, onToggleStatus }) => {
                 <GripVertical size={20} strokeWidth={1.5} />
             </div>
 
-            <div className="w-20 h-20 rounded-[1.5rem] bg-white/80 border border-[#330020]/10 overflow-hidden flex-shrink-0 group-hover:scale-105 transition-transform duration-500">
+            <div className="w-14 h-14 md:w-20 md:h-20 rounded-xl md:rounded-[1.5rem] bg-white/80 border border-[#330020]/10 overflow-hidden flex-shrink-0 group-hover:scale-105 transition-transform duration-500">
                 <SafeImage 
                     src={category.image?.url} 
                     alt={category.name} 
@@ -82,7 +82,7 @@ const SortableItem = ({ category, onEdit, onDelete, onToggleStatus }) => {
 
             <div className="flex-grow min-w-0">
                 <div className="flex items-center gap-4 mb-2">
-                    <h4 className="font-sans text-[20px] font-semibold text-[#330020] truncate tracking-tight">{category.name}</h4>
+                    <h4 className="font-sans text-[16px] md:text-[20px] font-semibold text-[#330020] truncate tracking-tight">{category.name}</h4>
                     <Badge variant={category.isActive ? 'success' : 'neutral'} className="!text-[8px] !px-3 !py-1">
                         {category.isActive ? 'Active' : 'Inactive'}
                     </Badge>
@@ -93,25 +93,25 @@ const SortableItem = ({ category, onEdit, onDelete, onToggleStatus }) => {
                 </div>
             </div>
 
-            <div className="flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-4 group-hover:translate-x-0">
+            <div className="flex flex-col md:flex-row items-center gap-1 md:gap-3 opacity-100 translate-x-0 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 md:translate-x-4 md:group-hover:translate-x-0">
                 <button 
                     onClick={() => onToggleStatus(category)}
-                    className="p-4 text-[#330020]/20 hover:text-[#330020] hover:bg-white/80 rounded-2xl transition-all"
+                    className="p-2 md:p-4 text-[#330020]/40 md:text-[#330020]/20 hover:text-[#330020] hover:bg-white/80 rounded-xl md:rounded-2xl transition-all"
                     title={category.isActive ? 'Deactivate Category' : 'Activate Category'}
                 >
-                    {category.isActive ? <EyeOff size={18} strokeWidth={1.5} /> : <Eye size={18} strokeWidth={1.5} />}
+                    {category.isActive ? <EyeOff size={16} md:size={18} strokeWidth={1.5} /> : <Eye size={16} md:size={18} strokeWidth={1.5} />}
                 </button>
                 <button 
                     onClick={() => onEdit(category)}
-                    className="p-4 text-[#330020]/20 hover:text-[#330020] hover:bg-white/80 rounded-2xl transition-all"
+                    className="p-2 md:p-4 text-[#330020]/40 md:text-[#330020]/20 hover:text-[#330020] hover:bg-white/80 rounded-xl md:rounded-2xl transition-all"
                 >
-                    <Edit2 size={18} strokeWidth={1.5} />
+                    <Edit2 size={16} md:size={18} strokeWidth={1.5} />
                 </button>
                 <button 
                     onClick={() => onDelete(category._id)}
-                    className="p-4 text-[#330020]/20 hover:text-red-500 hover:bg-red-50 rounded-2xl transition-all"
+                    className="p-2 md:p-4 text-[#330020]/40 md:text-[#330020]/20 hover:text-red-500 hover:bg-red-50 rounded-xl md:rounded-2xl transition-all"
                 >
-                    <Trash2 size={18} strokeWidth={1.5} />
+                    <Trash2 size={16} md:size={18} strokeWidth={1.5} />
                 </button>
             </div>
         </div>
@@ -280,13 +280,13 @@ const CategoryManagement = () => {
                         <h1 className="font-serif text-3xl font-semibold text-[#330020] mb-1">Categories</h1>
                         <p className="font-sans text-[10px] font-bold text-[#8A8F68] uppercase tracking-[3px]">Manage product groupings and display order</p>
                     </div>
-                    <div className="flex items-center gap-4">
+                    <div className="flex flex-col sm:flex-row items-center gap-4 w-full md:w-auto">
                         {isReordering && (
                             <Button 
                                 variant="primary" 
                                 onClick={saveOrder} 
                                 disabled={submitting}
-                                className="!px-10 !py-5 !text-[11px] shadow-xl shadow-primary/20"
+                                className="!px-6 !py-3 md:!px-10 md:!py-5 !text-[10px] md:!text-[11px] shadow-xl shadow-primary/20 w-full sm:w-auto"
                             >
                                 {submitting ? <Loader2 className="animate-spin" /> : <><Save size={16} className="mr-2" /> Save Order</>}
                             </Button>
@@ -294,7 +294,7 @@ const CategoryManagement = () => {
                         <Button 
                             variant={isReordering ? "secondary" : "primary"}
                             onClick={() => setShowModal(true)}
-                            className="!px-10 !py-5 !text-[11px] shadow-xl shadow-primary/20"
+                            className="!px-6 !py-3 md:!px-10 md:!py-5 !text-[10px] md:!text-[11px] shadow-xl shadow-primary/20 w-full sm:w-auto"
                         >
                             <Plus size={16} className="mr-2" /> Add New Category
                         </Button>
@@ -313,15 +313,15 @@ const CategoryManagement = () => {
                             className="w-full h-16 pl-20 pr-8 bg-white/75 border border-[#330020]/10 rounded-[20px] outline-none focus:border-[#8A8F68] focus:ring-4 focus:ring-[#8A8F68]/08 transition-all font-sans font-semibold text-xs text-[#330020]"
                         />
                     </div>
-                    <div className="flex gap-4">
-                        <div className="bg-white/82 backdrop-blur-md rounded-[24px] px-8 py-6 shadow-[0_10px_30px_rgba(51,0,32,0.05)] border border-[#330020]/08 flex items-center gap-6">
+                    <div className="flex flex-col sm:flex-row gap-4 w-full">
+                        <div className="bg-white/82 backdrop-blur-md rounded-[1.5rem] md:rounded-[24px] px-6 md:px-8 py-4 md:py-6 shadow-[0_10px_30px_rgba(51,0,32,0.05)] border border-[#330020]/08 flex items-center gap-4 md:gap-6 w-full">
                             <Layers size={20} className="text-[#330020]/20" />
                             <div>
                                 <p className="text-[9px] font-bold text-[#330020]/30 uppercase tracking-widest leading-none mb-1">Total Categories</p>
                                 <p className="text-lg font-bold text-[#330020] leading-none">{categories.length}</p>
                             </div>
                         </div>
-                        <div className="bg-white/82 backdrop-blur-md rounded-[24px] px-8 py-6 shadow-[0_10px_30px_rgba(51,0,32,0.05)] border border-[#330020]/08 flex items-center gap-6">
+                        <div className="bg-white/82 backdrop-blur-md rounded-[1.5rem] md:rounded-[24px] px-6 md:px-8 py-4 md:py-6 shadow-[0_10px_30px_rgba(51,0,32,0.05)] border border-[#330020]/08 flex items-center gap-4 md:gap-6 w-full">
                             <ArrowUpDown size={20} className="text-[#330020]/20" />
                             <div>
                                 <p className="text-[9px] font-bold text-[#330020]/30 uppercase tracking-widest leading-none mb-1">Sort Status</p>
@@ -386,11 +386,11 @@ const CategoryManagement = () => {
                             initial={{ opacity: 0, scale: 0.95, y: 20 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                            className="relative w-full max-w-2xl bg-[#F6F1EB] border border-[#330020]/10 rounded-[3.5rem] shadow-2xl p-12 overflow-hidden text-[#330020]"
+                            className="relative w-full max-w-2xl bg-[#F6F1EB] border border-[#330020]/10 rounded-[2rem] md:rounded-[3.5rem] shadow-2xl p-6 sm:p-8 md:p-12 overflow-hidden text-[#330020]"
                         >
-                            <div className="flex justify-between items-start mb-12">
+                            <div className="flex justify-between items-start mb-8 md:mb-12">
                                 <div>
-                                    <h2 className="text-3xl font-serif italic mb-2 text-[#330020]">
+                                    <h2 className="text-2xl md:text-3xl font-serif italic mb-2 text-[#330020]">
                                         {editingCategory ? 'Edit Category' : 'Add New Category'}
                                     </h2>
                                     <p className="text-[10px] font-bold text-[#330020]/40 uppercase tracking-widest">Configure category name and display image</p>
@@ -430,7 +430,7 @@ const CategoryManagement = () => {
                                             <label className="text-[10px] font-bold text-[#330020]/40 uppercase tracking-widest ml-2">Display Image</label>
                                             <div 
                                                 onClick={() => document.getElementById('category-image').click()}
-                                                className="aspect-square w-full bg-white/50 border border-[#330020]/10 rounded-[3rem] overflow-hidden group cursor-pointer relative shadow-soft"
+                                                className="aspect-square w-full max-w-[200px] md:max-w-none mx-auto bg-white/50 border border-[#330020]/10 rounded-[2rem] md:rounded-[3rem] overflow-hidden group cursor-pointer relative shadow-soft"
                                             >
                                                 {imagePreview ? (
                                                     <img src={imagePreview} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Preview" />

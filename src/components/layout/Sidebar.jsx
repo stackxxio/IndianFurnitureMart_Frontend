@@ -38,7 +38,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
 
     return (
         <aside className={`
-            fixed inset-y-0 left-0 w-80 bg-[#330020] border-r border-[#FAF6F0]/10 flex flex-col z-[80] transition-all duration-700 transform
+            fixed inset-y-0 left-0 w-[280px] sm:w-80 bg-[#330020] border-r border-[#FAF6F0]/10 flex flex-col z-[80] transition-all duration-700 transform
             ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
         `}>
             {/* Logo Section */}

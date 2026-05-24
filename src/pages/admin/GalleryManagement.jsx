@@ -140,7 +140,7 @@ const GalleryManagement = () => {
                     <Button 
                         onClick={() => handleOpenModal()}
                         variant="primary"
-                        className="!px-8 !py-4 !text-[11px] shadow-xl shadow-primary/20"
+                        className="!px-6 !py-3 md:!px-8 md:!py-4 !text-[10px] md:!text-[11px] shadow-xl shadow-primary/20 w-full md:w-auto"
                     >
                         <Plus size={16} className="mr-2" /> Add Gallery Image
                     </Button>
@@ -215,9 +215,9 @@ const GalleryManagement = () => {
                             initial={{ opacity: 0, scale: 0.95, y: 20 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                            className="relative bg-[#F6F1EB] border border-[#330020]/10 w-full max-w-xl rounded-[3rem] shadow-2xl p-10 overflow-hidden text-[#330020]"
+                            className="relative bg-[#F6F1EB] border border-[#330020]/10 w-full max-w-xl rounded-[2rem] sm:rounded-[3rem] shadow-2xl p-6 sm:p-10 overflow-hidden text-[#330020]"
                         >
-                            <div className="flex items-center justify-between mb-10">
+                            <div className="flex items-start justify-between mb-8 sm:mb-10 gap-4">
                                 <div>
                                     <h3 className="text-2xl font-serif italic mb-1">{editingItem ? 'Edit Gallery Image' : 'Add New Gallery Image'}</h3>
                                     <p className="text-[9px] font-bold text-[#330020]/40 uppercase tracking-widest">Configure gallery display and details</p>
@@ -237,7 +237,7 @@ const GalleryManagement = () => {
                                     />
                                 </div>
 
-                                <div className="grid grid-cols-2 gap-4">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     <div className="space-y-2">
                                         <label className="block font-sans text-[11px] font-bold tracking-[3px] uppercase text-[#330020]/60 ml-1">Gallery Type</label>
                                         <select

@@ -226,38 +226,38 @@ const ProductManagement = () => {
                     <Button 
                         onClick={() => handleOpenModal()}
                         variant="primary"
-                        className="!px-8 !py-4 !text-[11px] shadow-xl shadow-[#330020]/10 rounded-full"
+                        className="!px-6 !py-3 md:!px-8 md:!py-4 !text-[10px] md:!text-[11px] shadow-xl shadow-[#330020]/10 rounded-full w-full md:w-auto"
                     >
                         <Plus size={16} className="mr-2" /> Add New Product
                     </Button>
                 </div>
 
                 {/* Filters Bar */}
-                <div className="flex flex-col lg:flex-row gap-6 mb-10">
+                <div className="flex flex-col lg:flex-row gap-4 md:gap-6 mb-10">
                     <div className="flex-grow relative">
-                        <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-[#330020]/20" size={18} />
+                        <Search className="absolute left-5 md:left-6 top-1/2 -translate-y-1/2 text-[#330020]/20" size={18} />
                         <input 
                             type="text" 
                             placeholder="Search catalog..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className="w-full h-16 pl-16 pr-8 bg-white/75 border border-[#330020]/10 rounded-[20px] outline-none focus:border-[#8A8F68] focus:ring-4 focus:ring-[#8A8F68]/08 transition-all font-sans font-semibold text-xs shadow-soft text-[#330020] placeholder:text-[#330020]/30"
+                            className="w-full h-14 md:h-16 pl-12 md:pl-16 pr-6 md:pr-8 bg-white/75 border border-[#330020]/10 rounded-[1.25rem] md:rounded-[20px] outline-none focus:border-[#8A8F68] focus:ring-4 focus:ring-[#8A8F68]/08 transition-all font-sans font-semibold text-xs shadow-soft text-[#330020] placeholder:text-[#330020]/30"
                         />
                     </div>
-                    <div className="flex items-center gap-4">
-                        <div className="relative group">
+                    <div className="flex items-center gap-4 w-full lg:w-auto">
+                        <div className="relative group w-full lg:w-auto">
                             <select 
                                 value={selectedCategory}
                                 onChange={(e) => setSelectedCategory(e.target.value)}
-                                className="appearance-none pl-12 pr-12 h-16 bg-white/75 border border-[#330020]/10 rounded-[20px] outline-none font-sans font-semibold text-xs shadow-soft cursor-pointer min-w-[200px] text-[#330020] focus:border-[#8A8F68] focus:ring-4 focus:ring-[#8A8F68]/08 transition-all"
+                                className="appearance-none w-full pl-10 md:pl-12 pr-10 md:pr-12 h-14 md:h-16 bg-white/75 border border-[#330020]/10 rounded-[1.25rem] md:rounded-[20px] outline-none font-sans font-semibold text-xs shadow-soft cursor-pointer min-w-0 md:min-w-[200px] text-[#330020] focus:border-[#8A8F68] focus:ring-4 focus:ring-[#8A8F68]/08 transition-all"
                             >
                                 <option value="All">All Categories</option>
                                 {categories.map((cat, idx) => (
                                     <option key={`cat-opt-${cat._id || idx}`} value={cat.name}>{cat.name}</option>
                                 ))}
                             </select>
-                            <ChevronDown className="absolute right-6 top-1/2 -translate-y-1/2 text-[#330020]/20 pointer-events-none group-hover:text-[#330020]/40 transition-colors" size={14} />
-                            <Filter className="absolute left-6 top-1/2 -translate-y-1/2 text-[#330020]/20" size={14} />
+                            <ChevronDown className="absolute right-5 md:right-6 top-1/2 -translate-y-1/2 text-[#330020]/20 pointer-events-none group-hover:text-[#330020]/40 transition-colors" size={14} />
+                            <Filter className="absolute left-4 md:left-6 top-1/2 -translate-y-1/2 text-[#330020]/20 pointer-events-none" size={14} />
                         </div>
                     </div>
                 </div>
@@ -350,18 +350,18 @@ const ProductManagement = () => {
                             initial={{ opacity: 0, scale: 0.98, y: 10 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.98, y: 10 }}
-                            className="relative bg-[#F6F1EB] border border-[#330020]/10 w-full max-w-5xl rounded-[3rem] shadow-2xl p-12 max-h-[92vh] overflow-y-auto custom-scrollbar text-[#330020]"
+                            className="relative bg-[#F6F1EB] border border-[#330020]/10 w-full max-w-5xl rounded-[2rem] md:rounded-[3rem] shadow-2xl p-6 sm:p-8 md:p-12 max-h-[92vh] overflow-y-auto custom-scrollbar text-[#330020]"
                         >
-                            <div className="flex items-center justify-between mb-10">
+                            <div className="flex items-start sm:items-center justify-between mb-8 md:mb-10 gap-4">
                                 <div>
-                                    <h3 className="text-2xl font-serif italic mb-1">{editingProduct ? 'Edit Product' : 'Add New Product'}</h3>
-                                    <p className="text-[9px] font-bold text-[#330020]/40 uppercase tracking-widest">Configure product details and display options</p>
+                                    <h3 className="text-xl md:text-2xl font-serif italic mb-1">{editingProduct ? 'Edit Product' : 'Add New Product'}</h3>
+                                    <p className="text-[9px] font-bold text-[#330020]/40 uppercase tracking-widest leading-relaxed">Configure product details and display options</p>
                                 </div>
-                                <button onClick={() => setIsModalOpen(false)} className="p-3 text-[#330020]/20 hover:bg-white/80 rounded-full transition-all"><X size={20} /></button>
+                                <button onClick={() => setIsModalOpen(false)} className="p-3 text-[#330020]/20 hover:bg-white/80 rounded-full transition-all flex-shrink-0"><X size={20} /></button>
                             </div>
 
-                            <form onSubmit={handleSubmit} className="space-y-12">
-                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                            <form onSubmit={handleSubmit} className="space-y-8 md:space-y-12">
+                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16">
                                     {/* Left Column: Product DNA */}
                                     <div className="space-y-10">
                                         <div className="space-y-3">
@@ -370,7 +370,7 @@ const ProductManagement = () => {
                                                 type="text"
                                                 value={formData.name}
                                                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                                className="w-full px-8 py-6 bg-white/80 border border-[#330020]/10 rounded-3xl outline-none focus:ring-1 focus:ring-primary/10 transition-all font-bold text-sm text-[#330020] placeholder:text-[#330020]/30"
+                                                className="w-full px-5 py-4 md:px-8 md:py-6 bg-white/80 border border-[#330020]/10 rounded-2xl md:rounded-3xl outline-none focus:ring-1 focus:ring-primary/10 transition-all font-bold text-sm text-[#330020] placeholder:text-[#330020]/30"
                                                 placeholder="e.g. Haveli Carved Armchair"
                                                 required
                                             />
@@ -384,11 +384,11 @@ const ProductManagement = () => {
                                                         type="number"
                                                         value={formData.originalPrice}
                                                         onChange={(e) => setFormData({ ...formData, originalPrice: e.target.value })}
-                                                        className="w-full bg-white/80 border border-[#330020]/10 rounded-3xl px-8 py-6 text-sm focus:outline-none focus:border-primary/20 transition-all font-medium text-[#330020]"
+                                                        className="w-full bg-white/80 border border-[#330020]/10 rounded-2xl md:rounded-3xl px-5 py-4 md:px-8 md:py-6 text-sm focus:outline-none focus:border-primary/20 transition-all font-medium text-[#330020]"
                                                         placeholder="0.00"
                                                         required
                                                     />
-                                                    <span className="absolute right-8 top-1/2 -translate-y-1/2 text-[#330020]/20 font-bold">₹</span>
+                                                    <span className="absolute right-5 md:right-8 top-1/2 -translate-y-1/2 text-[#330020]/20 font-bold">₹</span>
                                                 </div>
                                             </div>
                                             <div className="space-y-3">
@@ -398,11 +398,11 @@ const ProductManagement = () => {
                                                         type="number"
                                                         value={formData.price}
                                                         onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-                                                        className="w-full bg-white/80 border border-[#330020]/10 rounded-3xl px-8 py-6 text-sm focus:outline-none focus:border-primary/20 transition-all font-medium text-[#330020]"
+                                                        className="w-full bg-white/80 border border-[#330020]/10 rounded-2xl md:rounded-3xl px-5 py-4 md:px-8 md:py-6 text-sm focus:outline-none focus:border-primary/20 transition-all font-medium text-[#330020]"
                                                         placeholder="0.00"
                                                         required
                                                     />
-                                                    <span className="absolute right-8 top-1/2 -translate-y-1/2 text-[#330020]/20 font-bold">₹</span>
+                                                    <span className="absolute right-5 md:right-8 top-1/2 -translate-y-1/2 text-[#330020]/20 font-bold">₹</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -414,7 +414,7 @@ const ProductManagement = () => {
                                                     type="number"
                                                     value={formData.stock}
                                                     onChange={(e) => setFormData({ ...formData, stock: e.target.value })}
-                                                    className="w-full bg-white/80 border border-[#330020]/10 rounded-3xl px-8 py-6 text-sm focus:outline-none focus:border-primary/20 transition-all font-medium text-[#330020]"
+                                                    className="w-full bg-white/80 border border-[#330020]/10 rounded-2xl md:rounded-3xl px-5 py-4 md:px-8 md:py-6 text-sm focus:outline-none focus:border-primary/20 transition-all font-medium text-[#330020]"
                                                     placeholder="0"
                                                     required
                                                 />
@@ -425,7 +425,7 @@ const ProductManagement = () => {
                                                     <select
                                                         value={formData.category}
                                                         onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                                                        className="w-full bg-white/80 border border-[#330020]/10 rounded-3xl px-8 py-6 text-sm focus:outline-none focus:border-primary/20 transition-all font-medium appearance-none cursor-pointer text-[#330020]"
+                                                        className="w-full bg-white/80 border border-[#330020]/10 rounded-2xl md:rounded-3xl px-5 py-4 md:px-8 md:py-6 text-sm focus:outline-none focus:border-primary/20 transition-all font-medium appearance-none cursor-pointer text-[#330020]"
                                                         required
                                                     >
                                                         <option value="">Select Category</option>
@@ -433,7 +433,7 @@ const ProductManagement = () => {
                                                             <option key={`cat-id-${cat._id || idx}`} value={cat._id}>{cat.name}</option>
                                                         ))}
                                                     </select>
-                                                    <ChevronDown className="absolute right-8 top-1/2 -translate-y-1/2 text-[#330020]/20 pointer-events-none" size={16} />
+                                                    <ChevronDown className="absolute right-5 md:right-8 top-1/2 -translate-y-1/2 text-[#330020]/20 pointer-events-none" size={16} />
                                                 </div>
                                             </div>
                                         </div>
@@ -459,12 +459,12 @@ const ProductManagement = () => {
                                             </div>
                                             <div 
                                                 onClick={() => document.getElementById('product-images').click()}
-                                                className="w-full aspect-video bg-white/50 border-2 border-dashed border-[#330020]/10 rounded-[2.5rem] flex flex-col items-center justify-center cursor-pointer hover:bg-white hover:border-[#8A8F68]/30 transition-all group overflow-hidden relative"
+                                                className="w-full min-h-[200px] bg-white/50 border-2 border-dashed border-[#330020]/10 rounded-2xl md:rounded-[2.5rem] flex flex-col items-center justify-center cursor-pointer hover:bg-white hover:border-[#8A8F68]/30 transition-all group overflow-hidden relative p-4"
                                             >
                                                 {previews.length > 0 ? (
-                                                    <div className="grid grid-cols-5 gap-3 p-6 w-full h-full">
+                                                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 w-full h-full">
                                                         {previews.map((preview, i) => (
-                                                            <div key={i} className="relative aspect-square rounded-2xl overflow-hidden shadow-soft group/img">
+                                                            <div key={i} className="relative aspect-square rounded-xl md:rounded-2xl overflow-hidden shadow-soft group/img">
                                                                 <SafeImage src={preview} className="w-full h-full object-cover" />
                                                                 {i === 0 && (
                                                                     <div className="absolute top-2 left-2 px-2 py-1 bg-[#8A8F68] text-[#FAF6F0] text-[6px] font-bold uppercase tracking-widest rounded-md shadow-lg">Cover</div>
@@ -472,14 +472,14 @@ const ProductManagement = () => {
                                                                 <button 
                                                                     type="button"
                                                                     onClick={(e) => { e.stopPropagation(); removeImage(i); }}
-                                                                    className="absolute top-2 right-2 w-6 h-6 rounded-full bg-red-500 text-[#FAF6F0] flex items-center justify-center opacity-0 group-hover/img:opacity-100 transition-all shadow-lg z-10"
+                                                                    className="absolute top-2 right-2 w-6 h-6 rounded-full bg-red-500 text-[#FAF6F0] flex items-center justify-center sm:opacity-0 group-hover/img:opacity-100 transition-all shadow-lg z-10"
                                                                 >
                                                                     <X size={12} />
                                                                 </button>
                                                             </div>
                                                         ))}
                                                         {previews.length < 5 && (
-                                                            <div className="flex items-center justify-center border-2 border-dashed border-[#330020]/10 rounded-2xl hover:bg-white transition-all">
+                                                            <div className="flex items-center justify-center border-2 border-dashed border-[#330020]/10 rounded-xl md:rounded-2xl hover:bg-white transition-all aspect-square min-h-[80px]">
                                                                 <Plus size={20} className="text-[#330020]/10" />
                                                             </div>
                                                         )}

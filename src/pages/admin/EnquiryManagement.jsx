@@ -178,16 +178,16 @@ const EnquiryManagement = () => {
                                             <span className="text-[8px] font-bold text-orange-600 uppercase tracking-widest">New</span>
                                         </div>
                                     )}
-                                    <div className="p-8 sm:p-10 cursor-pointer" onClick={() => toggleGroup(group.phone)}>
-                                        <div className="flex flex-col xl:flex-row gap-8 items-center xl:items-start justify-between">
+                                    <div className="p-5 sm:p-10 cursor-pointer" onClick={() => toggleGroup(group.phone)}>
+                                        <div className="flex flex-col xl:flex-row gap-6 sm:gap-8 items-start justify-between">
                                             
                                             {/* Customer Profile Summary */}
-                                            <div className="flex items-center gap-5 w-full xl:w-1/3">
-                                                <div className="w-16 h-16 bg-[#F6F1EB] rounded-[1.5rem] flex items-center justify-center text-[#330020]/40 border border-[#330020]/10">
+                                            <div className="flex items-center gap-4 sm:gap-5 w-full xl:w-1/3">
+                                                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-[#F6F1EB] rounded-xl sm:rounded-[1.5rem] flex items-center justify-center text-[#330020]/40 border border-[#330020]/10 flex-shrink-0">
                                                     <User size={24} strokeWidth={1.5} />
                                                 </div>
-                                                <div className="min-w-0">
-                                                    <h3 className="font-sans text-2xl font-semibold text-[#330020] leading-none mb-2 truncate">
+                                                <div className="min-w-0 flex-1">
+                                                    <h3 className="font-sans text-xl sm:text-2xl font-semibold text-[#330020] leading-none mb-2 truncate">
                                                         {group.customerName}
                                                     </h3>
                                                     <div className="flex flex-wrap gap-2">
@@ -198,19 +198,19 @@ const EnquiryManagement = () => {
                                             </div>
 
                                             {/* Quick Stats */}
-                                            <div className="flex items-center gap-8 w-full xl:w-auto px-4 py-3 bg-[#F6F1EB]/50 rounded-2xl border border-[#330020]/5">
-                                                <div className="text-center">
-                                                    <p className="text-2xl font-bold text-[#330020]">{group.totalEnquiries}</p>
+                                            <div className="flex items-center justify-between sm:justify-center gap-2 sm:gap-8 w-full xl:w-auto px-4 sm:px-6 py-3 bg-[#F6F1EB]/50 rounded-2xl border border-[#330020]/5">
+                                                <div className="text-center flex-1 sm:flex-none">
+                                                    <p className="text-xl sm:text-2xl font-bold text-[#330020]">{group.totalEnquiries}</p>
                                                     <p className="text-[8px] font-bold text-[#330020]/40 uppercase tracking-widest">Total</p>
                                                 </div>
-                                                <div className="w-[1px] h-8 bg-[#330020]/10"></div>
-                                                <div className="text-center">
-                                                    <p className="text-2xl font-bold text-amber-500">{group.pendingCount}</p>
+                                                <div className="w-[1px] h-8 bg-[#330020]/10 hidden sm:block"></div>
+                                                <div className="text-center flex-1 sm:flex-none">
+                                                    <p className="text-xl sm:text-2xl font-bold text-amber-500">{group.pendingCount}</p>
                                                     <p className="text-[8px] font-bold text-[#330020]/40 uppercase tracking-widest">Pending</p>
                                                 </div>
-                                                <div className="w-[1px] h-8 bg-[#330020]/10"></div>
-                                                <div className="text-center">
-                                                    <p className="text-2xl font-bold text-[#8A8F68]">{group.completedCount}</p>
+                                                <div className="w-[1px] h-8 bg-[#330020]/10 hidden sm:block"></div>
+                                                <div className="text-center flex-1 sm:flex-none">
+                                                    <p className="text-xl sm:text-2xl font-bold text-[#8A8F68]">{group.completedCount}</p>
                                                     <p className="text-[8px] font-bold text-[#330020]/40 uppercase tracking-widest">Closed</p>
                                                 </div>
                                             </div>
@@ -248,17 +248,17 @@ const EnquiryManagement = () => {
                                                 exit={{ height: 0, opacity: 0 }}
                                                 className="border-t border-[#330020]/10 bg-[#F6F1EB]/30"
                                             >
-                                                <div className="p-8 sm:p-10 space-y-6">
+                                                <div className="p-5 sm:p-10 space-y-6">
                                                     <p className="text-[10px] font-bold text-[#330020]/40 uppercase tracking-widest mb-6">Enquiry Timeline History</p>
-                                                    <div className="relative border-l-2 border-[#330020]/10 ml-4 space-y-10 pl-8">
+                                                    <div className="relative border-l-2 border-[#330020]/10 ml-2 sm:ml-4 space-y-8 sm:space-y-10 pl-6 sm:pl-8">
                                                         {group.enquiries.map((enquiry, idx) => (
                                                             <div key={`grp-enq-${enquiry._id || idx}`} className="relative">
                                                                 {/* Timeline Dot */}
-                                                                <div className="absolute -left-[41px] top-1 w-5 h-5 bg-white border-2 border-[#8A8F68] rounded-full flex items-center justify-center z-10 shadow-sm">
+                                                                <div className="absolute -left-[35px] sm:-left-[41px] top-1 w-5 h-5 bg-white border-2 border-[#8A8F68] rounded-full flex items-center justify-center z-10 shadow-sm">
                                                                     <div className="w-2 h-2 bg-[#8A8F68] rounded-full"></div>
                                                                 </div>
                                                                 
-                                                                <div className="bg-white rounded-2xl border border-[#330020]/10 p-6 shadow-sm">
+                                                                <div className="bg-white rounded-[1.5rem] sm:rounded-2xl border border-[#330020]/10 p-5 sm:p-6 shadow-sm">
                                                                     <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
                                                                         <div className="flex items-center gap-3">
                                                                             <span className="text-[10px] font-bold text-[#330020]/40 uppercase tracking-widest">
@@ -304,7 +304,7 @@ const EnquiryManagement = () => {
                                                                             const currentIdx = stages.indexOf(enquiry.status);
                                                                             const isCancelled = enquiry.status === 'cancelled';
                                                                             
-                                                                            const btnBase = "flex-1 min-w-[100px] py-2.5 rounded-xl transition-all duration-500 text-[9px] font-bold uppercase tracking-widest flex items-center justify-center gap-1.5 border border-transparent relative overflow-hidden";
+                                                                            const btnBase = "flex-1 min-w-[80px] sm:min-w-[100px] py-2.5 rounded-xl transition-all duration-500 text-[8px] sm:text-[9px] font-bold uppercase tracking-widest flex items-center justify-center gap-1.5 border border-transparent relative overflow-hidden";
                                                                             
                                                                             return (
                                                                                 <>

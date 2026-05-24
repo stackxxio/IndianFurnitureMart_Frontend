@@ -77,7 +77,7 @@ const SettingsManagement = () => {
                     <p className="font-sans text-[10px] font-bold text-[#8A8F68] uppercase tracking-[3px]">Manage dynamic contact info, mart location map, socials, and footer blocks</p>
                 </div>
 
-                <form onSubmit={handleSave} className="bg-white/82 backdrop-blur-md border border-[#330020]/08 rounded-[28px] p-8 sm:p-12 space-y-10 shadow-[0_10px_30px_rgba(51,0,32,0.05)] text-[#330020]">
+                <form onSubmit={handleSave} className="bg-white/82 backdrop-blur-md border border-[#330020]/08 rounded-[1.5rem] sm:rounded-[28px] p-6 sm:p-12 space-y-8 sm:space-y-10 shadow-[0_10px_30px_rgba(51,0,32,0.05)] text-[#330020]">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div className="space-y-2">
                             <label className="block font-sans text-[11px] font-bold tracking-[3px] uppercase text-[#330020]/60 ml-1">Preferred City</label>
@@ -203,7 +203,7 @@ const SettingsManagement = () => {
                         <button 
                             type="submit" 
                             disabled={submitting} 
-                            className="h-16 px-10 bg-[#330020] text-[#FAF6F0] text-[11px] font-sans font-bold uppercase tracking-[2px] rounded-full hover:bg-[#8A8F68] hover:shadow-lg hover:shadow-[#8A8F68]/20 transition-all flex items-center gap-2 disabled:opacity-50 cursor-pointer"
+                            className="h-14 sm:h-16 px-8 sm:px-10 w-full sm:w-auto justify-center bg-[#330020] text-[#FAF6F0] text-[10px] sm:text-[11px] font-sans font-bold uppercase tracking-[2px] rounded-full hover:bg-[#8A8F68] hover:shadow-lg hover:shadow-[#8A8F68]/20 transition-all flex items-center gap-2 disabled:opacity-50 cursor-pointer"
                         >
                             {submitting ? <Loader2 className="animate-spin" size={14} /> : <Save size={14} />}
                             Save Configurations
@@ -214,7 +214,7 @@ const SettingsManagement = () => {
                 {/* HELP MODAL DIALOG */}
                 {showHelpModal && (
                     <div className="fixed inset-0 bg-[#330020]/40 backdrop-blur-sm z-[999] flex items-center justify-center p-4">
-                        <div className="bg-[#F6F1EB] rounded-[3rem] border border-[#330020]/10 p-10 max-w-md w-full shadow-2xl relative text-[#330020]">
+                        <div className="bg-[#F6F1EB] rounded-[2rem] sm:rounded-[3rem] border border-[#330020]/10 p-6 sm:p-10 max-w-md w-full shadow-2xl relative text-[#330020]">
                             <button 
                                 type="button" 
                                 onClick={() => setShowHelpModal(false)} 

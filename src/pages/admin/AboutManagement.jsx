@@ -179,7 +179,7 @@ const AboutManagement = () => {
                 <form onSubmit={handleSubmit} className="space-y-10">
                     
                     {/* 1. Hero settings Card */}
-                    <div className="bg-white/82 backdrop-blur-md rounded-[28px] p-8 md:p-10 shadow-[0_10px_30px_rgba(51,0,32,0.05)] border border-[#330020]/08 text-[#330020]">
+                    <div className="bg-white/82 backdrop-blur-md rounded-[28px] p-6 sm:p-10 shadow-[0_10px_30px_rgba(51,0,32,0.05)] border border-[#330020]/08 text-[#330020]">
                         <div className="flex items-center gap-3 mb-8 border-b border-[#330020]/10 pb-4">
                             <Compass size={20} className="text-[#8A8F68] shrink-0" />
                             <h3 className="text-lg font-bold text-[#330020]">Hero Spotlight Banner</h3>
@@ -249,7 +249,7 @@ const AboutManagement = () => {
                     </div>
 
                     {/* 2. Brand Narrative Card */}
-                    <div className="bg-white/82 backdrop-blur-md rounded-[28px] p-8 md:p-10 shadow-[0_10px_30px_rgba(51,0,32,0.05)] border border-[#330020]/08 text-[#330020]">
+                    <div className="bg-white/82 backdrop-blur-md rounded-[28px] p-6 sm:p-10 shadow-[0_10px_30px_rgba(51,0,32,0.05)] border border-[#330020]/08 text-[#330020]">
                         <div className="flex items-center gap-3 mb-8 border-b border-[#330020]/10 pb-4">
                             <FileText size={20} className="text-[#8A8F68] shrink-0" />
                             <h3 className="text-lg font-bold text-[#330020]">Brand Story & Narrative</h3>
@@ -283,7 +283,7 @@ const AboutManagement = () => {
                     </div>
 
                     {/* 3. Founder / Owner section Card */}
-                    <div className="bg-white/82 backdrop-blur-md rounded-[28px] p-8 md:p-10 shadow-[0_10px_30px_rgba(51,0,32,0.05)] border border-[#330020]/08 text-[#330020]">
+                    <div className="bg-white/82 backdrop-blur-md rounded-[28px] p-6 sm:p-10 shadow-[0_10px_30px_rgba(51,0,32,0.05)] border border-[#330020]/08 text-[#330020]">
                         <div className="flex items-center gap-3 mb-8 border-b border-[#330020]/10 pb-4">
                             <User size={20} className="text-[#8A8F68] shrink-0" />
                             <h3 className="text-lg font-bold text-[#330020]">Founder & Owner Profile</h3>
@@ -353,7 +353,7 @@ const AboutManagement = () => {
                     </div>
 
                     {/* 4. Mart Gallery Asset Card */}
-                    <div className="bg-white/82 backdrop-blur-md rounded-[28px] p-8 md:p-10 shadow-[0_10px_30px_rgba(51,0,32,0.05)] border border-[#330020]/08 text-[#330020]">
+                    <div className="bg-white/82 backdrop-blur-md rounded-[28px] p-6 sm:p-10 shadow-[0_10px_30px_rgba(51,0,32,0.05)] border border-[#330020]/08 text-[#330020]">
                         <div className="flex items-center gap-3 mb-8 border-b border-[#330020]/10 pb-4">
                             <ImageIcon size={20} className="text-[#8A8F68] shrink-0" />
                             <h3 className="text-lg font-bold text-[#330020]">Virtual Mart Gallery</h3>
@@ -427,18 +427,18 @@ const AboutManagement = () => {
                     </div>
 
                     {/* Action Panel */}
-                    <div className="flex justify-end gap-4">
+                    <div className="flex flex-col-reverse sm:flex-row justify-end gap-4 w-full">
                         <button
                             type="button"
                             onClick={fetchAboutData}
-                            className="px-8 h-16 rounded-full border border-[#330020]/15 text-[#330020]/80 text-[11px] font-sans font-bold uppercase tracking-[2px] hover:bg-white/80 transition-all"
+                            className="px-8 h-14 sm:h-16 w-full sm:w-auto rounded-full border border-[#330020]/15 text-[#330020]/80 text-[10px] sm:text-[11px] font-sans font-bold uppercase tracking-[2px] hover:bg-white/80 transition-all"
                             disabled={saving}
                         >
                             Reset Changes
                         </button>
                         <button
                             type="submit"
-                            className="px-10 h-16 rounded-full bg-[#330020] text-[#FAF6F0] text-[11px] font-sans font-bold uppercase tracking-[2px] hover:bg-[#8A8F68] hover:shadow-lg hover:shadow-[#8A8F68]/20 transition-all duration-500 flex items-center gap-3 disabled:opacity-50 cursor-pointer"
+                            className="px-8 sm:px-10 h-14 sm:h-16 w-full sm:w-auto justify-center rounded-full bg-[#330020] text-[#FAF6F0] text-[10px] sm:text-[11px] font-sans font-bold uppercase tracking-[2px] hover:bg-[#8A8F68] hover:shadow-lg hover:shadow-[#8A8F68]/20 transition-all duration-500 flex items-center gap-3 disabled:opacity-50 cursor-pointer"
                             disabled={saving}
                         >
                             {saving ? (

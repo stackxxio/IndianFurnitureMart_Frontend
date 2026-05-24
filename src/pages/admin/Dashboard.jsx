@@ -203,9 +203,9 @@ const AdminDashboard = () => {
                     <motion.div 
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        className="lg:col-span-2 bg-white/88 backdrop-blur-md rounded-[34px] p-10 shadow-[0_15px_45px_rgba(51,0,32,0.06)] border border-[#330020]/08 relative"
+                        className="lg:col-span-2 bg-white/88 backdrop-blur-md rounded-[34px] p-6 md:p-10 shadow-[0_15px_45px_rgba(51,0,32,0.06)] border border-[#330020]/08 relative"
                     >
-                        <div className="flex items-center justify-between mb-10">
+                        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 md:mb-10 gap-4">
                             <div>
                                 <h3 className="font-serif text-2xl font-semibold tracking-tight mb-1 text-[#330020]">Enquiry Analytics</h3>
                                 <p className="font-sans text-[10px] font-bold text-[#8A8F68] uppercase tracking-[2px]">Mart enquiries & consultation tracking</p>
@@ -233,8 +233,8 @@ const AdminDashboard = () => {
                                 </div>
                             )}
                             
-                            <div className={`h-full w-full ${(!stats.chartData || stats.chartData.length === 0) ? 'opacity-15 blur-[1px] pointer-events-none' : ''}`}>
-                                <ResponsiveContainer width="100%" height="100%">
+                            <div className={`h-full w-full min-h-[350px] min-w-0 ${(!stats.chartData || stats.chartData.length === 0) ? 'opacity-15 blur-[1px] pointer-events-none' : ''}`}>
+                                <ResponsiveContainer width="100%" height="100%" minWidth={1} minHeight={1}>
                                     <AreaChart data={stats.chartData && stats.chartData.length > 0 ? stats.chartData : placeholderData} margin={{ top: 0, right: 0, left: -20, bottom: 0 }}>
                                         <defs>
                                             <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
@@ -293,16 +293,16 @@ const AdminDashboard = () => {
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                            <div className="p-8 bg-white/80 backdrop-blur-md rounded-3xl border border-[#330020]/08 shadow-[0_8px_25px_rgba(51,0,32,0.03)] hover:-translate-y-1.5 hover:shadow-[0_15px_35px_rgba(51,0,32,0.08)] transition-all duration-300 flex flex-col justify-between">
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
+                            <div className="p-6 md:p-8 bg-white/80 backdrop-blur-md rounded-[1.5rem] md:rounded-3xl border border-[#330020]/08 shadow-[0_8px_25px_rgba(51,0,32,0.03)] hover:-translate-y-1.5 hover:shadow-[0_15px_35px_rgba(51,0,32,0.08)] transition-all duration-300 flex flex-col justify-between">
                                 <p className="text-[#330020]/48 font-sans font-bold text-[10px] uppercase tracking-[2px] mb-2">Today's Enquiries</p>
                                 <p className="text-3xl font-sans font-bold text-[#330020]">{stats.todayRevenue}</p>
                             </div>
-                            <div className="p-8 bg-gradient-to-br from-[#330020] to-[#4A0130] rounded-3xl shadow-[0_15px_35px_rgba(51,0,32,0.15)] hover:-translate-y-1.5 hover:shadow-[0_20px_40px_rgba(51,0,32,0.25)] transition-all duration-300 flex flex-col justify-between text-white">
+                            <div className="p-6 md:p-8 bg-gradient-to-br from-[#330020] to-[#4A0130] rounded-[1.5rem] md:rounded-3xl shadow-[0_15px_35px_rgba(51,0,32,0.15)] hover:-translate-y-1.5 hover:shadow-[0_20px_40px_rgba(51,0,32,0.25)] transition-all duration-300 flex flex-col justify-between text-white">
                                 <p className="text-white/60 font-sans font-bold text-[10px] uppercase tracking-[2px] mb-2">Monthly Enquiries</p>
                                 <p className="text-3xl font-sans font-bold">{stats.monthlyRevenue}</p>
                             </div>
-                            <div className="p-8 bg-white/80 backdrop-blur-md rounded-3xl border border-[#330020]/08 shadow-[0_8px_25px_rgba(51,0,32,0.03)] hover:-translate-y-1.5 hover:shadow-[0_15px_35px_rgba(51,0,32,0.08)] transition-all duration-300 flex flex-col justify-between">
+                            <div className="p-6 md:p-8 bg-white/80 backdrop-blur-md rounded-[1.5rem] md:rounded-3xl border border-[#330020]/08 shadow-[0_8px_25px_rgba(51,0,32,0.03)] hover:-translate-y-1.5 hover:shadow-[0_15px_35px_rgba(51,0,32,0.08)] transition-all duration-300 flex flex-col justify-between">
                                 <p className="text-[#330020]/48 font-sans font-bold text-[10px] uppercase tracking-[2px] mb-2">Confirmed Enquiries</p>
                                 <p className="text-3xl font-sans font-bold text-[#330020]">{stats.totalConfirmed}</p>
                             </div>
@@ -313,9 +313,9 @@ const AdminDashboard = () => {
                     <motion.div 
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        className="bg-white/82 backdrop-blur-md rounded-[28px] p-10 shadow-[0_10px_30px_rgba(51,0,32,0.05)] border border-[#330020]/08"
+                        className="bg-white/82 backdrop-blur-md rounded-[28px] p-6 md:p-10 shadow-[0_10px_30px_rgba(51,0,32,0.05)] border border-[#330020]/08"
                     >
-                        <div className="flex items-center justify-between mb-10">
+                        <div className="flex items-center justify-between mb-8 md:mb-10">
                             <h3 className="text-xl font-bold tracking-tight text-[#330020]">Recent Activity</h3>
                             <Link to="/admin/users">
                                 <Button variant="secondary" className="!p-3"><Search size={14} /></Button>
@@ -356,9 +356,9 @@ const AdminDashboard = () => {
                     <motion.div 
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="lg:col-span-2 bg-white/82 backdrop-blur-md rounded-[28px] p-10 shadow-[0_10px_30px_rgba(51,0,32,0.05)] border border-[#330020]/08"
+                        className="lg:col-span-2 bg-white/82 backdrop-blur-md rounded-[28px] p-6 md:p-10 shadow-[0_10px_30px_rgba(51,0,32,0.05)] border border-[#330020]/08"
                     >
-                        <div className="flex items-center justify-between mb-10">
+                        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 md:mb-10 gap-4">
                             <div>
                                 <h3 className="text-xl font-bold tracking-tight mb-1 text-[#330020]">Recent Enquiries</h3>
                                 <p className="text-[10px] font-bold text-[#8A8F68] uppercase tracking-widest">{stats.pendingEnquiries} Pending enquiries awaiting review</p>
@@ -409,9 +409,9 @@ const AdminDashboard = () => {
                     <motion.div 
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="bg-white/82 backdrop-blur-md rounded-[28px] p-10 shadow-[0_10px_30px_rgba(51,0,32,0.05)] border border-[#330020]/08 flex flex-col"
+                        className="bg-white/82 backdrop-blur-md rounded-[28px] p-6 md:p-10 shadow-[0_10px_30px_rgba(51,0,32,0.05)] border border-[#330020]/08 flex flex-col"
                     >
-                        <h3 className="text-xl font-bold tracking-tight mb-8 text-[#330020]">Quick Actions</h3>
+                        <h3 className="text-xl font-bold tracking-tight mb-6 md:mb-8 text-[#330020]">Quick Actions</h3>
                         <div className="grid grid-cols-2 gap-4 mb-8">
                             {[
                                 { name: 'Products', sub: 'Manage Stock', icon: Package, link: '/admin/products' },
@@ -433,7 +433,7 @@ const AdminDashboard = () => {
                             ))}
                         </div>
                         
-                        <div className="mt-auto p-10 bg-[#F6F1EB]/50 rounded-[24px] border border-[#330020]/06 relative overflow-hidden group cursor-pointer shadow-soft">
+                        <div className="mt-auto p-6 md:p-10 bg-[#F6F1EB]/50 rounded-[24px] border border-[#330020]/06 relative overflow-hidden group cursor-pointer shadow-soft">
                             <div className="relative z-10">
                                 <h4 className="text-2xl font-bold leading-tight mb-6 text-[#330020]">Generate System <br />Performance Report</h4>
                                 <Button variant="primary" className="!px-6 !py-3 !text-[10px] group-hover:translate-x-2 transition-transform">
