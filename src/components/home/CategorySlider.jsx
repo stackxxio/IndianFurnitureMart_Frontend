@@ -13,8 +13,8 @@ const CategorySlider = ({ categories, loading }) => {
 
     if (loading) {
         return (
-            <div className="flex flex-wrap justify-center gap-6 md:gap-10 lg:gap-12 py-10">
-                {[...Array(5)].map((_, i) => (
+            <div className="grid grid-rows-2 grid-flow-col gap-4 overflow-x-hidden md:flex md:flex-wrap md:justify-center md:gap-10 lg:gap-12 py-10 px-4 md:px-0 auto-cols-max">
+                {[...Array(6)].map((_, i) => (
                     <div 
                         key={i} 
                         className="w-[140px] h-[140px] md:w-[160px] md:h-[160px] lg:w-[180px] lg:h-[180px] bg-black/[0.03] animate-pulse rounded-[2rem]" 
@@ -30,8 +30,8 @@ const CategorySlider = ({ categories, loading }) => {
         <div className="relative group/slider w-full max-w-7xl mx-auto">
             <div className="flex flex-col gap-12">
                 
-                {/* Centered Flex Layout for Categories */}
-                <div className="flex flex-wrap justify-center items-center gap-8 md:gap-10 lg:gap-12 pb-4 px-4">
+                {/* 2-Row Horizontal Scroll on Mobile, Flex Wrap on Desktop */}
+                <div className="grid grid-rows-2 grid-flow-col gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar md:flex md:flex-wrap md:justify-center md:items-center md:gap-10 lg:gap-12 pb-8 px-4 md:px-0 auto-cols-max [-webkit-overflow-scrolling:touch]">
                     <AnimatePresence mode='popLayout'>
                         {visibleCategories.map((cat, i) => (
                             <motion.div
@@ -43,7 +43,7 @@ const CategorySlider = ({ categories, loading }) => {
                                     duration: 0.8, 
                                     ease: [0.22, 1, 0.36, 1] 
                                 }}
-                                className="flex-shrink-0"
+                                className="flex-shrink-0 snap-start md:snap-align-none"
                             >
                                 <Link 
                                     to={`/products?category=${cat._id}`}
