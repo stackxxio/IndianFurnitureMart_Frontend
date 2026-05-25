@@ -224,7 +224,7 @@ const Footer = () => {
                         <p className="text-[9px] font-bold text-[#F6F1EB]/48 uppercase tracking-[0.25em]">{copyright}</p>
                         <span className="hidden lg:inline text-[#F6F1EB]/20 text-[9px]">•</span>
                         <p className="text-[9px] font-bold text-[#F6F1EB]/40 uppercase tracking-[0.25em] flex items-center gap-1.5 justify-center">
-                            Designed & Developed by <a href="https://stackxxio.com" target="_blank" rel="noopener noreferrer" className="text-[#8A8F68] hover:text-[#F6F1EB] transition-colors duration-300">Stackxxio</a>
+                            Designed & Developed by <a href="https://www.instagram.com/stackxxio?igsh=MTduMGF5NXVndTNlbQ==" target="_blank" rel="noopener noreferrer" className="text-[#8A8F68] hover:text-[#F6F1EB] transition-colors duration-300">Stackxxio</a>
                         </p>
                     </div>
                     <div className="flex gap-8 text-[9px] font-bold text-[#F6F1EB]/48 uppercase tracking-widest">
