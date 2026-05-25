@@ -225,7 +225,7 @@ const EnquiryDrawer = () => {
                                                                 </button>
                                                             </div>
                                                             <p className="text-[10px] font-sans font-bold uppercase tracking-widest text-[#330020]/48 mt-1">
-                                                                ₹{item.product.price?.toLocaleString('en-IN')}
+                                                                {item.product.showPrice !== false ? `₹${item.product.price?.toLocaleString('en-IN')}` : 'Price on Request'}
                                                             </p>
                                                         </div>
                                                         <div className="flex items-center justify-between mt-3">
@@ -271,11 +271,22 @@ const EnquiryDrawer = () => {
                         {/* Footer */}
                         {items.length > 0 && (
                             <div className="bg-white/55 border-t border-[#330020]/10 p-8">
-                                <div className="flex justify-between items-center mb-6">
-                                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#330020]/48">Subtotal Estimate</span>
-                                    <span className="text-xl font-sans font-bold text-[#330020]">
-                                        ₹{items.reduce((acc, item) => acc + (item.product.price * item.quantity), 0).toLocaleString('en-IN')}
-                                    </span>
+                                <div className="flex flex-col mb-6">
+                                    <div className="flex justify-between items-center">
+                                        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#330020]/48">Subtotal Estimate</span>
+                                        <span className="text-xl font-sans font-bold text-[#330020]">
+                                            {items.some(item => item.product.showPrice === false) ? (
+                                                <span className="text-base font-serif italic text-[#8A8F68]">Price on Request</span>
+                                            ) : (
+                                                `₹${items.reduce((acc, item) => acc + (item.product.price * item.quantity), 0).toLocaleString('en-IN')}`
+                                            )}
+                                        </span>
+                                    </div>
+                                    {items.some(item => item.product.showPrice === false) && (
+                                        <span className="text-[8px] font-bold text-[#8A8F68] uppercase tracking-wider text-right mt-1.5 block">
+                                            * Total price will be provided upon inquiry
+                                        </span>
+                                    )}
                                 </div>
                                 <button
                                     onClick={handleProceedToDetails}
@@ -320,7 +331,9 @@ const EnquiryDrawer = () => {
                                             </div>
                                             <div className="min-w-0 flex-1">
                                                 <p className="text-xs font-serif text-[#330020] truncate">{item.product.name}</p>
-                                                <p className="text-[9px] font-sans font-bold text-[#330020]/48 uppercase mt-0.5">x{item.quantity} • ₹{item.product.price?.toLocaleString('en-IN')}</p>
+                                                <p className="text-[9px] font-sans font-bold text-[#330020]/48 uppercase mt-0.5">
+                                                    x{item.quantity} • {item.product.showPrice !== false ? `₹${item.product.price?.toLocaleString('en-IN')}` : 'Price on Request'}
+                                                </p>
                                             </div>
                                         </div>
                                     ))}
@@ -328,11 +341,22 @@ const EnquiryDrawer = () => {
                             </div>
                             
                             <div className="pt-6 border-t border-[#330020]/10 mt-6 md:mt-0">
-                                <div className="flex justify-between items-center text-[#330020]">
-                                    <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#330020]/48">Subtotal Estimate</span>
-                                    <span className="text-lg font-sans font-bold text-[#330020]">
-                                        ₹{items.reduce((acc, item) => acc + (item.product.price * item.quantity), 0).toLocaleString('en-IN')}
-                                    </span>
+                                <div className="flex flex-col text-[#330020]">
+                                    <div className="flex justify-between items-center">
+                                        <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#330020]/48">Subtotal Estimate</span>
+                                        <span className="text-lg font-sans font-bold text-[#330020]">
+                                            {items.some(item => item.product.showPrice === false) ? (
+                                                <span className="text-base font-serif italic text-[#8A8F68]">Price on Request</span>
+                                            ) : (
+                                                `₹${items.reduce((acc, item) => acc + (item.product.price * item.quantity), 0).toLocaleString('en-IN')}`
+                                            )}
+                                        </span>
+                                    </div>
+                                    {items.some(item => item.product.showPrice === false) && (
+                                        <span className="text-[8px] font-bold text-[#8A8F68] uppercase tracking-wider text-right mt-1.5 block">
+                                            * Total price will be provided upon inquiry
+                                        </span>
+                                    )}
                                 </div>
                             </div>
                         </div>

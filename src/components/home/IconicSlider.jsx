@@ -208,12 +208,20 @@ const ProductCard = React.memo(({ product, index, getProductName, getProductImag
                             <div className="flex flex-col min-w-0">
                                 <span className="font-sans text-[8px] md:text-[9px] font-semibold tracking-[2px] uppercase text-[#8A8F68] leading-none mb-1.5">Curation Price</span>
                                 <div className="flex items-baseline gap-1 md:gap-1.5">
-                                    <span className="font-sans text-[22px] md:text-[24px] font-bold text-[#330020] leading-none">
-                                        ₹{product.price?.toLocaleString('en-IN')}
-                                    </span>
-                                    {product.originalPrice > product.price && (
-                                        <span className="font-sans text-[12px] opacity-45 line-through leading-none text-[#330020]">
-                                            ₹{product.originalPrice?.toLocaleString('en-IN')}
+                                    {product.showPrice !== false ? (
+                                        <>
+                                            <span className="font-sans text-[22px] md:text-[24px] font-bold text-[#330020] leading-none">
+                                                ₹{product.price?.toLocaleString('en-IN')}
+                                            </span>
+                                            {product.originalPrice > product.price && (
+                                                <span className="font-sans text-[12px] opacity-45 line-through leading-none text-[#330020]">
+                                                    ₹{product.originalPrice?.toLocaleString('en-IN')}
+                                                </span>
+                                            )}
+                                        </>
+                                    ) : (
+                                        <span className="font-sans text-[11px] font-bold uppercase tracking-wider text-accent leading-none py-1">
+                                            Price on Request
                                         </span>
                                     )}
                                 </div>

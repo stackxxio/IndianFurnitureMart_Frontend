@@ -344,9 +344,17 @@ const ProductDetails = () => {
 
                                 <div className="flex flex-col gap-4 mb-8">
                                     <div className="flex items-baseline gap-5">
-                                        <span className="text-4xl md:text-5xl font-bold text-[#330020] tracking-tight">₹{product.price?.toLocaleString('en-IN')}</span>
-                                        {product.originalPrice > product.price && (
-                                            <span className="text-2xl text-[#330020]/30 line-through font-light tracking-tight">₹{product.originalPrice?.toLocaleString('en-IN')}</span>
+                                        {product.showPrice !== false ? (
+                                            <>
+                                                <span className="text-4xl md:text-5xl font-bold text-[#330020] tracking-tight">₹{product.price?.toLocaleString('en-IN')}</span>
+                                                {product.originalPrice > product.price && (
+                                                    <span className="text-2xl text-[#330020]/30 line-through font-light tracking-tight">₹{product.originalPrice?.toLocaleString('en-IN')}</span>
+                                                )}
+                                            </>
+                                        ) : (
+                                            <span className="text-2xl md:text-3xl font-serif italic text-accent tracking-wide">
+                                                Price on Request
+                                            </span>
                                         )}
                                     </div>
                                 </div>
@@ -422,7 +430,7 @@ const ProductDetails = () => {
                                             className="flex-1 min-h-[64px] py-4 px-6 rounded-full bg-[#330020] text-[#F6F1EB] text-[11px] font-bold uppercase tracking-[0.3em] flex items-center justify-center gap-4 transition-all duration-500 shadow-lg shadow-[#330020]/10 hover:bg-[#4A012E] hover:shadow-lg hover:shadow-[#4A012E]/20 border border-transparent relative overflow-hidden group cursor-pointer flex-shrink-0"
                                         >
                                             <span className="relative z-10 flex items-center gap-3">
-                                                Add To Enquiry <ArrowRight size={16} className="group-hover:translate-x-1.5 transition-transform" />
+                                                {product.showPrice !== false ? "Add To Enquiry" : "Inquire Price"} <ArrowRight size={16} className="group-hover:translate-x-1.5 transition-transform" />
                                             </span>
                                         </button>
                                         
@@ -700,7 +708,7 @@ const ProductDetails = () => {
                         onClick={handleAddToEnquiry}
                         className="flex-1 h-14 rounded-full bg-[#330020] text-[#F6F1EB] text-[10px] font-bold uppercase tracking-[0.2em] flex items-center justify-center shadow-lg shadow-[#330020]/10"
                     >
-                        Add To Enquiry
+                        {product.showPrice !== false ? "Add To Enquiry" : "Inquire Price"}
                     </button>
                 </div>
             </div>

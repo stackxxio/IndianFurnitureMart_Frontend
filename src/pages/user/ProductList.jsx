@@ -425,12 +425,20 @@ const ProductList = () => {
                                         {/* Price & Quantity Layout */}
                                         <div className="flex items-end justify-between pt-3 md:pt-4 border-t border-black/[0.04] mb-4">
                                             <div className="flex flex-col gap-1">
-                                                <span className="font-sans text-[22px] md:text-[24px] font-bold text-[#330020] leading-none">
-                                                    ₹{product.price.toLocaleString('en-IN')}
-                                                </span>
-                                                {product.originalPrice > product.price && (
-                                                    <span className="font-sans text-[12px] opacity-45 line-through leading-none text-[#330020]/45">
-                                                        ₹{product.originalPrice.toLocaleString('en-IN')}
+                                                {product.showPrice !== false ? (
+                                                    <>
+                                                        <span className="font-sans text-[22px] md:text-[24px] font-bold text-[#330020] leading-none">
+                                                            ₹{product.price.toLocaleString('en-IN')}
+                                                        </span>
+                                                        {product.originalPrice > product.price && (
+                                                            <span className="font-sans text-[12px] opacity-45 line-through leading-none text-[#330020]/45">
+                                                                ₹{product.originalPrice.toLocaleString('en-IN')}
+                                                            </span>
+                                                        )}
+                                                    </>
+                                                ) : (
+                                                    <span className="font-sans text-[12px] font-bold uppercase tracking-wider text-accent leading-none py-1">
+                                                        Price on Request
                                                     </span>
                                                 )}
                                             </div>
@@ -465,7 +473,7 @@ const ProductList = () => {
                                                 onClick={(e) => { e.preventDefault(); addToCart(product); }}
                                                 className="w-full min-h-[46px] py-3.5 px-2 rounded-xl bg-primary text-white text-[9px] font-bold uppercase tracking-[0.2em] border border-transparent hover:bg-[#4A012E] transition-all shadow-md shadow-black/10 hover:shadow-lg hover:shadow-black/20 flex items-center justify-center text-center cursor-pointer leading-tight"
                                             >
-                                                Add Enquiry
+                                                {product.showPrice !== false ? "Add Enquiry" : "Contact Us"}
                                             </button>
                                         </div>
                                     </div>

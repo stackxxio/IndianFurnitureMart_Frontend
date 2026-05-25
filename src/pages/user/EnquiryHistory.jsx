@@ -167,7 +167,13 @@ const EnquiryHistory = () => {
                                                         <div className="flex items-center gap-2 text-[9px] font-bold text-[#330020]/48 uppercase tracking-wider">
                                                             <span>Qty: {item.quantity}</span>
                                                             <span className="w-1 h-1 bg-[#330020]/20 rounded-full" />
-                                                            <span className="text-[#8A8F68]">₹{item.productId?.price ? item.productId.price.toLocaleString('en-IN') : 'N/A'}</span>
+                                                            <span className="text-[#8A8F68]">
+                                                                {item.productId?.showPrice !== false && item.productId?.price ? (
+                                                                    `₹${item.productId.price.toLocaleString('en-IN')}`
+                                                                ) : (
+                                                                    'Price on Request'
+                                                                )}
+                                                            </span>
                                                         </div>
                                                     </div>
                                                 </div>

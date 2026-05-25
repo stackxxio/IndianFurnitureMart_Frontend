@@ -39,6 +39,7 @@ const ProductManagement = () => {
         isIconic: false,
         isFeatured: false,
         isBulkPricingAvailable: false,
+        showPrice: true,
         homePriority: 0
     });
     const [selectedFiles, setSelectedFiles] = useState([]);
@@ -81,6 +82,7 @@ const ProductManagement = () => {
                 isIconic: product.isIconic, 
                 isFeatured: product.isFeatured || false,
                 isBulkPricingAvailable: product.isBulkPricingAvailable || false,
+                showPrice: product.showPrice !== undefined ? product.showPrice : true,
                 homePriority: product.homePriority || 0 
             });
             const imgs = product.images ? product.images : (product.image ? [{ url: product.image, public_id: '' }] : []);
@@ -100,6 +102,7 @@ const ProductManagement = () => {
                 isIconic: false, 
                 isFeatured: false,
                 isBulkPricingAvailable: false,
+                showPrice: true,
                 homePriority: 0 
             });
             setExistingImages([]);
@@ -295,7 +298,12 @@ const ProductManagement = () => {
                                             <Badge variant="neutral" className="!text-[8px] !bg-white/80 border border-[#330020]/10">{typeof product.category === 'object' ? product.category?.name : product.category}</Badge>
                                         </td>
                                         <td className="px-8 py-6">
-                                             <span className="font-sans text-[22px] font-bold text-[#330020]">₹{product.price.toLocaleString('en-IN')}</span>
+                                             <div className="flex flex-col">
+                                                 <span className="font-sans text-[22px] font-bold text-[#330020]">₹{product.price.toLocaleString('en-IN')}</span>
+                                                 {!product.showPrice && (
+                                                     <span className="text-[9px] font-bold text-[#8A8F68] uppercase tracking-wider mt-0.5">Hidden</span>
+                                                 )}
+                                             </div>
                                         </td>
                                         <td className="px-8 py-6">
                                             <div className="flex flex-col gap-1">
@@ -405,6 +413,25 @@ const ProductManagement = () => {
                                                     <span className="absolute right-5 md:right-8 top-1/2 -translate-y-1/2 text-[#330020]/20 font-bold">₹</span>
                                                 </div>
                                             </div>
+                                        </div>
+                                        
+                                        {/* Toggle button for Show Price */}
+                                        <div className="flex items-center justify-between p-5 bg-white/50 border border-[#330020]/10 rounded-[1.5rem] md:rounded-[2rem]">
+                                            <div className="flex flex-col gap-1 pr-4">
+                                                <span className="text-[10px] font-bold uppercase tracking-widest text-[#330020]/60">Show Price to Public</span>
+                                                <span className="text-[10px] text-[#330020]/40 font-medium">Disable to hide the price and show "Price on Request / Contact Us"</span>
+                                            </div>
+                                            <button
+                                                type="button"
+                                                onClick={() => setFormData({ ...formData, showPrice: !formData.showPrice })}
+                                                className="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none bg-gray-300/60"
+                                                style={{ backgroundColor: formData.showPrice ? '#330020' : 'rgba(209, 213, 219, 0.6)' }}
+                                            >
+                                                <span
+                                                    className="pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"
+                                                    style={{ transform: formData.showPrice ? 'translateX(20px)' : 'translateX(0px)' }}
+                                                />
+                                            </button>
                                         </div>
 
                                         <div className="grid grid-cols-2 gap-8">

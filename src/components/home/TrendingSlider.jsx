@@ -242,19 +242,27 @@ const TrendingSlider = () => {
                                                     <div className="space-y-2 md:space-y-2.5 text-center">
                                                         <div className="w-full h-[1px] bg-white/5" />
                                                         <div className="flex flex-col items-center justify-center gap-1 min-w-0">
-                                                            <span className="font-sans text-[22px] md:text-[24px] font-bold text-[#F6F1EB]">
-                                                                ₹{product.price?.toLocaleString('en-IN')}
-                                                            </span>
-                                                            
-                                                            {product.originalPrice > product.price && (
-                                                                <div className="flex items-center gap-2">
-                                                                     <span className="font-sans text-[12px] opacity-45 line-through text-[#F6F1EB]">
-                                                                        ₹{product.originalPrice?.toLocaleString('en-IN')}
+                                                            {product.showPrice !== false ? (
+                                                                <>
+                                                                    <span className="font-sans text-[22px] md:text-[24px] font-bold text-[#F6F1EB]">
+                                                                        ₹{product.price?.toLocaleString('en-IN')}
                                                                     </span>
-                                                                    <span className="font-sans text-[8px] md:text-[9px] font-semibold tracking-[2px] uppercase text-[#8A8F68] bg-[#8A8F68]/20 px-2 py-0.5 rounded-md">
-                                                                        SAVE ₹{Math.round(product.originalPrice - product.price).toLocaleString('en-IN')}
-                                                                    </span>
-                                                                </div>
+                                                                    
+                                                                    {product.originalPrice > product.price && (
+                                                                        <div className="flex items-center gap-2">
+                                                                             <span className="font-sans text-[12px] opacity-45 line-through text-[#F6F1EB]">
+                                                                                ₹{product.originalPrice?.toLocaleString('en-IN')}
+                                                                            </span>
+                                                                            <span className="font-sans text-[8px] md:text-[9px] font-semibold tracking-[2px] uppercase text-[#8A8F68] bg-[#8A8F68]/20 px-2 py-0.5 rounded-md">
+                                                                                SAVE ₹{Math.round(product.originalPrice - product.price).toLocaleString('en-IN')}
+                                                                            </span>
+                                                                        </div>
+                                                                    )}
+                                                                </>
+                                                            ) : (
+                                                                <span className="font-sans text-[11px] font-bold uppercase tracking-wider text-[#8A8F68] leading-none py-1">
+                                                                    Price on Request
+                                                                </span>
                                                             )}
                                                         </div>
                                                     </div>
