@@ -215,7 +215,7 @@ const GalleryManagement = () => {
                             initial={{ opacity: 0, scale: 0.95, y: 20 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                            className="relative bg-[#F6F1EB] border border-[#330020]/10 w-full max-w-xl rounded-[2rem] sm:rounded-[3rem] shadow-2xl p-6 sm:p-10 overflow-hidden text-[#330020]"
+                            className="relative bg-[#F6F1EB] border border-[#330020]/10 w-full max-w-xl rounded-[2rem] sm:rounded-[3rem] shadow-2xl p-6 sm:p-10 overflow-y-auto max-h-[90vh] text-[#330020] scrollbar-hide"
                         >
                             <div className="flex items-start justify-between mb-8 sm:mb-10 gap-4">
                                 <div>

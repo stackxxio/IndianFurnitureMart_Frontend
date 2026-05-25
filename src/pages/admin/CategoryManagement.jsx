@@ -386,7 +386,7 @@ const CategoryManagement = () => {
                             initial={{ opacity: 0, scale: 0.95, y: 20 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                            className="relative w-full max-w-2xl bg-[#F6F1EB] border border-[#330020]/10 rounded-[2rem] md:rounded-[3.5rem] shadow-2xl p-6 sm:p-8 md:p-12 overflow-hidden text-[#330020]"
+                            className="relative w-full max-w-2xl bg-[#F6F1EB] border border-[#330020]/10 rounded-[2rem] md:rounded-[3.5rem] shadow-2xl p-6 sm:p-8 md:p-12 overflow-y-auto max-h-[90vh] text-[#330020] scrollbar-hide"
                         >
                             <div className="flex justify-between items-start mb-8 md:mb-12">
                                 <div>

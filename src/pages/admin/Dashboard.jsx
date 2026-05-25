@@ -141,22 +141,22 @@ const AdminDashboard = () => {
                         <h1 className="font-serif text-3xl font-semibold text-[#330020] mb-1.5">Overview</h1>
                         <p className="font-sans text-sm font-bold text-[#8A8F68] uppercase tracking-[3px]">Real-time statistics and system activity</p>
                     </div>
-                    <div className="flex items-center gap-4">
-                        <div className="flex bg-white/80 p-1 rounded-xl border border-[#330020]/10">
+                    <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full md:w-auto">
+                        <div className="flex w-full sm:w-auto bg-white/80 p-1 rounded-xl border border-[#330020]/10">
                             <button 
                                 onClick={() => setPeriod('weekly')}
-                                className={`px-6 py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${period === 'weekly' ? 'bg-[#330020] shadow-soft text-[#FAF6F0]' : 'text-[#330020]/40 hover:text-[#330020]'}`}
+                                className={`flex-1 sm:flex-none px-6 py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${period === 'weekly' ? 'bg-[#330020] shadow-soft text-[#FAF6F0]' : 'text-[#330020]/40 hover:text-[#330020]'}`}
                             >
                                 Weekly
                             </button>
                             <button 
                                 onClick={() => setPeriod('monthly')}
-                                className={`px-6 py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${period === 'monthly' ? 'bg-[#330020] shadow-soft text-[#FAF6F0]' : 'text-[#330020]/40 hover:text-[#330020]'}`}
+                                className={`flex-1 sm:flex-none px-6 py-2 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${period === 'monthly' ? 'bg-[#330020] shadow-soft text-[#FAF6F0]' : 'text-[#330020]/40 hover:text-[#330020]'}`}
                             >
                                 Monthly
                             </button>
                         </div>
-                        <Button variant="primary" className="!px-6 !py-3 !text-[10px]">
+                        <Button variant="primary" className="w-full sm:w-auto !px-6 !py-3 !text-[10px] justify-center">
                             <Calendar size={14} className="mr-2" /> Schedule Report
                         </Button>
                     </div>
