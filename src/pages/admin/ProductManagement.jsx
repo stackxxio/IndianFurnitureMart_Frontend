@@ -386,7 +386,7 @@ const ProductManagement = () => {
                                                         onChange={(e) => setFormData({ ...formData, originalPrice: e.target.value })}
                                                         className="w-full bg-white/80 border border-[#330020]/10 rounded-2xl md:rounded-3xl px-5 py-4 md:px-8 md:py-6 text-sm focus:outline-none focus:border-primary/20 transition-all font-medium text-[#330020]"
                                                         placeholder="0.00"
-                                                        required
+                                                        // required
                                                     />
                                                     <span className="absolute right-5 md:right-8 top-1/2 -translate-y-1/2 text-[#330020]/20 font-bold">₹</span>
                                                 </div>
@@ -400,7 +400,7 @@ const ProductManagement = () => {
                                                         onChange={(e) => setFormData({ ...formData, price: e.target.value })}
                                                         className="w-full bg-white/80 border border-[#330020]/10 rounded-2xl md:rounded-3xl px-5 py-4 md:px-8 md:py-6 text-sm focus:outline-none focus:border-primary/20 transition-all font-medium text-[#330020]"
                                                         placeholder="0.00"
-                                                        required
+                                                        // required
                                                     />
                                                     <span className="absolute right-5 md:right-8 top-1/2 -translate-y-1/2 text-[#330020]/20 font-bold">₹</span>
                                                 </div>
